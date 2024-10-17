@@ -1,0 +1,31 @@
+@API_test_HostAddress = http://localhost:5049
+
+GET {{API_test_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{API_test_HostAddress}}/todos/1
+Accept: application/json
+
+###
+
+### Отправка видеофайла через cURL
+POST http://localhost:5049/api/video HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="video"; filename="videoplayback.mp4"
+Content-Type: video/mp4
+
+###
+
+GET http://localhost:5049/api/video/videoplayback.mp4 HTTP/1.1
+Host: localhost:5049
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="filename"
+
+videoplayback.mp4
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
