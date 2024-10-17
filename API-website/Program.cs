@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 // Настройка Kestrel для использования определенного IP-адреса и порта
 builder.WebHost.UseKestrel(options =>
 {
-    options.Listen(IPAddress.Parse("26.197.1.24"), 8080); // Установите IP и порт
+    options.Listen(IPAddress.Parse("26.234.86.94"), 8080); // Установите IP и порт
 });
 
 var app = builder.Build();

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Xabe.FFmpeg;
 
@@ -105,11 +104,6 @@ public class InteractionFiles()
     {
 
     }
-}
-
-public class DBSave()
-{
-
 }
 
 public class User()
