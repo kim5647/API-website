@@ -97,31 +97,31 @@ public class VideoController : ControllerBase
         var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
         return File(fileStream, "video/mp4");
     }
-}
-public class InteractionFiles()
-{
-    public void CreateFile()
+    private readonly DBSave _dbContext;
+
+    // Получаем контекст через DI
+    public VideoController(DBSave dbContext)
     {
-
+        _dbContext = dbContext;
     }
-}
 
-public class User()
-{
-    public string Name { get => _name;
-        set
+    [HttpPost("register")]
+    public async Task<IActionResult> RegisterUser([FromForm] string username, [FromForm] int password)
+    {
+        try
         {
-            _name = value;
-            InteractionFiles(_name);
+            // Создаем нового пользователя
+            var newUser = new User(username, password);
+
+            // Добавляем его в базу данных через контекст DBSave
+            _dbContext.Users.Add(newUser);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok("User registered successfully.");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal server error: " + ex.Message);
         }
     }
-    private string _name;
-
-    public void InteractionFiles(string Name) => 
-        System.IO.Directory.CreateDirectory(Path.Combine("G:/video", Name));
-}
-public class Video()
-{
-    public string Name { get; set ; }
-    public string PathFile { get; set; }
 }
